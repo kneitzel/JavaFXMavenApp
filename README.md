@@ -1,4 +1,4 @@
-# JavaFX Maen Project
+# JavaFX Maven Project
 
 Example Maven Project for a JavaFX Application.
 

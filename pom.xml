@@ -20,21 +20,26 @@
         <main.class>de.kneitzel.JavaFXApp</main.class>
         <main.module>FXAppModule</main.module>
         <java.version>17</java.version>
+        <required.maven.version>3.6.3</required.maven.version>
 
         <!-- Dependency versions -->
         <junit.version>5.8.2</junit.version>
         <javafx.version>17.0.2</javafx.version>
         <lombok.version>1.18.20</lombok.version>
+        <jetbrains.annotations.version>23.0.0</jetbrains.annotations.version>
 
         <!-- Plugin dependencies -->
         <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
         <maven.dependency.plugin>3.1.2</maven.dependency.plugin>
+        <maven.enforcer.plugin>3.1.0</maven.enforcer.plugin>
         <maven.surfire.plugin>3.0.0-M5</maven.surfire.plugin>
         <moditect.maven.plugin>1.0.0.RC1</moditect.maven.plugin>
         <jpackage.maven.plugin>0.1.2</jpackage.maven.plugin>
-        <maven.pmd.version>3.14.0</maven.pmd.version>
-        <pmd.version>6.38.0</pmd.version>
+        <maven.pmd.version>3.16.0</maven.pmd.version>
+        <pmd.version>6.47.0</pmd.version>
         <codehaus.version.plugin>2.8.1</codehaus.version.plugin>
+        <spotbugs.maven.plugin>4.7.1.0</spotbugs.maven.plugin>
+        <spotbugs.version>4.7.1</spotbugs.version>
 
         <!-- other properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,6 +72,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Dependency used for @NotNull / @Nullable -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${jetbrains.annotations.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -77,6 +90,27 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${required.maven.version}</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -206,6 +240,32 @@
             </plugin>
 
             <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs.maven.plugin}</version>
+                <dependencies>
+                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                    <dependency>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs</artifactId>
+                        <version>${spotbugs.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <!-- pmd does not stop build when violations are found -->
+                            <goal>spotbugs</goal>
+
+                            <!-- check stops the build when violations are found -->
+                            <!-- <goal>check</goal> -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven.pmd.version}</version>
@@ -241,8 +301,13 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>check</goal>
+                            <!-- pmd does not stop build when violations are found -->
+                            <goal>pmd</goal>
+
+                            <!-- check stops the build when violations are found -->
+                            <!-- <goal>check</goal> -->
                         </goals>
                     </execution>
                 </executions>

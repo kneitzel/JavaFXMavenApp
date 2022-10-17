@@ -1,14 +1,16 @@
 package de.kneitzel;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class JavaFXApp extends Application {
+	static final Logger logger = LogManager.getLogger(JavaFXApp.class);
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -24,6 +26,7 @@ public class JavaFXApp extends Application {
 	}
 
 	public static void main(String[] args) {
+		logger.warn("Starting ...");
 		launch(args);
 	}
 	   

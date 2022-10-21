@@ -270,7 +270,7 @@
                                 <name>${launcher}</name>
                                 <module>${main.module}</module>
                             </launcher>
-                            <bindServices/>
+                            <bindServices>true</bindServices>
                             <compression>2</compression>
                             <!-- <jarInclusionPolicy>NONE</jarInclusionPolicy> -->
                             <jarInclusionPolicy>APP_WITH_DEPENDENCIES</jarInclusionPolicy>

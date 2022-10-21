@@ -256,6 +256,8 @@
                                         requires transitive java.sql;
                                         requires transitive java.xml;
 
+                                        requires org.apache.logging.log4j;
+
                                         exports org.apache.logging.log4j.core;
                                         exports org.apache.logging.log4j.core.appender;
                                         exports org.apache.logging.log4j.core.appender.db;
@@ -358,6 +360,7 @@
                                 <name>${launcher}</name>
                                 <module>${main.module}</module>
                             </launcher>
+                            <bindServices>true</bindServices>
                             <compression>2</compression>
                             <!-- <jarInclusionPolicy>NONE</jarInclusionPolicy> -->
                             <jarInclusionPolicy>APP_WITH_DEPENDENCIES</jarInclusionPolicy>

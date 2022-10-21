@@ -5,12 +5,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class JavaFXApp extends Application {
-	static final Logger logger = LogManager.getLogger(JavaFXApp.class);
+	static final Logger logger = LoggerFactory.getLogger(JavaFXApp.class);
 
 	@Override
 	public void start(Stage primaryStage) {

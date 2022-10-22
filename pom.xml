@@ -255,6 +255,7 @@
                                 <module>${main.module}</module>
                             </launcher>
                             <compression>2</compression>
+                            <bindServices>true</bindServices>
                             <jarInclusionPolicy>APP_WITH_DEPENDENCIES</jarInclusionPolicy>
                             <stripDebug>true</stripDebug>
                             <outputDirectory>${project.build.directory}/jlink-image</outputDirectory>

@@ -17,7 +17,7 @@
         <link.name>${project.artifactId}</link.name>
         <launcher>${project.artifactId}</launcher>
         <appName>${project.artifactId}</appName>
-        <main.class>de.kneitzel.JavaFXApp</main.class>
+        <main.class>de.kneitzel.Main</main.class>
         <main.module>FXAppModule</main.module>
         <java.version>17</java.version>
         <required.maven.version>3.6.3</required.maven.version>
@@ -31,6 +31,7 @@
         <spotbugs.version>4.7.3</spotbugs.version>
 
         <!-- Plugin dependencies -->
+        <codehaus.exec.plugin>3.1.0</codehaus.exec.plugin>
         <codehaus.version.plugin>2.11.0</codehaus.version.plugin>
         <jpackage.maven.plugin>0.1.3</jpackage.maven.plugin>
 		<maven.clean.plugin>3.2.0</maven.clean.plugin>
@@ -309,6 +310,29 @@
                             <imageName>${appName}</imageName>
                             <mainClass>${main.class}</mainClass>
                         </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${codehaus.exec.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>java-agent</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>java</executable>
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <arguments>
+                                        <argument>-classpath</argument>
+                                        <classpath/>
+                                        <argument>${main.class}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

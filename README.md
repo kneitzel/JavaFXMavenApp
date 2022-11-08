@@ -14,3 +14,14 @@ This is just for testing purpose / was requiried during threads in http://java-f
 
 Die Versuche mit der GraalVM sind bisher nicht erfolgreich. Es wird zwar alles übersetzt,
 aber es gibt Probleme, da auf Klassen über den Classloader zugegriffen werden soll.
+
+
+* Aktueller Stand *
+
+Agent Dateien können generiert werden mit:
+./mvnw -PGraalVM -Dagent=true -DagentOptions=periodic-config -DskipTests -DskipNativeBuild=true package exec:exec@java-agent
+
+Und dann kann man übersetzen mit:
+./mvnw -PGraalVM -Dagent=true -DskipTests package
+
+Start geht, aber es wird kein Fenster angezeigt...

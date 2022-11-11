@@ -256,6 +256,8 @@
                                         requires transitive java.sql;
                                         requires transitive java.xml;
 
+                                        requires org.apache.logging.log4j;
+
                                         exports org.apache.logging.log4j.core;
                                         exports org.apache.logging.log4j.core.appender;
                                         exports org.apache.logging.log4j.core.appender.db;
@@ -311,15 +313,18 @@
                                         exports org.apache.logging.log4j.core.util.datetime;
                                         exports org.apache.logging.log4j.core.util.internal;
 
+                                        uses org.apache.logging.log4j.core.util.WatchEventService;
+                                        uses org.apache.logging.log4j.core.util.ContextDataProvider;
+
                                         provides javax.annotation.processing.Processor with
                                             org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor;
-                                        provides org.apache.logging.log4j.core.util.ContextDataProvider with
-                                            org.apache.logging.log4j.core.impl.ThreadContextDataProvider;
                                         provides org.apache.logging.log4j.message.ThreadDumpMessage.ThreadInfoFactory with
                                             org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory;
                                         provides org.apache.logging.log4j.spi.Provider with
                                             org.apache.logging.log4j.core.impl.Log4jProvider;
 
+                                        provides org.apache.logging.log4j.core.util.ContextDataProvider with
+                                            org.apache.logging.log4j.core.impl.ThreadContextDataProvider;
                                     }
                                     </moduleInfoSource>
                                 </module>
@@ -358,6 +363,7 @@
                                 <name>${launcher}</name>
                                 <module>${main.module}</module>
                             </launcher>
+                            <bindServices>true</bindServices>
                             <compression>2</compression>
                             <!-- <jarInclusionPolicy>NONE</jarInclusionPolicy> -->
                             <jarInclusionPolicy>APP_WITH_DEPENDENCIES</jarInclusionPolicy>

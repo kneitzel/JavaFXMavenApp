@@ -179,111 +179,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven.dependency.plugin}</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.moditect</groupId>
-                <artifactId>moditect-maven-plugin</artifactId>
-                <version>${moditect.maven.plugin}</version>
-                <executions>
-                    <execution>
-                        <id>add-module-info-to-dependencies</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <overwriteExistingFiles>true</overwriteExistingFiles>
-							<!-- Beispiel wie eine Dependency ohne module-info diese bekommen kann! -->
-							<!--
-                            <modules>
-                                <module>
-                                    <artifact>
-                                        <groupId>org.json</groupId>
-                                        <artifactId>json</artifactId>
-                                    </artifact>
-                                    <moduleInfo>
-                                        <name>org.json</name>
-                                    </moduleInfo>
-                                </module>
-                            </modules>
-							-->
-
-                            <module>
-                                <mainClass>${main.class}</mainClass>
-                                <moduleInfoFile>${project.build.sourceDirectory}/module-info.java</moduleInfoFile>
-                            </module>
-
-                            <jdepsExtraArgs>
-                                --ignore-missing-deps
-                            </jdepsExtraArgs>
-                        </configuration>
-                        <goals>
-                            <goal>add-module-info</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-runtime-image</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>create-runtime-image</goal>
-                        </goals>
-                        <configuration>
-                            <modulePath>
-                                <path>${project.build.directory}/modules</path>
-                            </modulePath>
-                            <modules>
-                                <module>${main.module}</module>
-                            </modules>
-                            <launcher>
-                                <name>${launcher}</name>
-                                <module>${main.module}</module>
-                            </launcher>
-                            <compression>2</compression>
-                            <bindServices>true</bindServices>
-                            <jarInclusionPolicy>APP_WITH_DEPENDENCIES</jarInclusionPolicy>
-                            <stripDebug>true</stripDebug>
-                            <outputDirectory>${project.build.directory}/jlink-image</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.github.akman</groupId>
-                <artifactId>jpackage-maven-plugin</artifactId>
-                <version>${jpackage.maven.plugin}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jpackage</goal>
-                        </goals>
-                        <configuration>
-                            <name>${appName}</name>
-                            <type>IMAGE</type>
-                            <runtimeimage>${project.build.directory}/jlink-image</runtimeimage>
-                            <module>${main.module}/${main.class}</module>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>${spotbugs.maven.plugin}</version>
@@ -376,4 +271,136 @@
 
         </plugins>
     </build>
+
+    <profiles>
+
+        <!-- Profile that adds JLink and JPackage runs.
+
+             Add -PImage or -DImage to use this profile.
+             -->
+        <profile>
+            <id>Image</id>
+            <activation>
+                <property>
+                    <name>Image</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+
+                    <!-- Copy dependencies -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven.dependency.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                                    <overWriteReleases>false</overWriteReleases>
+                                    <overWriteSnapshots>false</overWriteSnapshots>
+                                    <overWriteIfNewer>true</overWriteIfNewer>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Build image -->
+                    <plugin>
+                        <groupId>org.moditect</groupId>
+                        <artifactId>moditect-maven-plugin</artifactId>
+                        <version>${moditect.maven.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>add-module-info-to-dependencies</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                                    <overwriteExistingFiles>true</overwriteExistingFiles>
+                                    <!-- Beispiel wie eine Dependency ohne module-info diese bekommen kann! -->
+                                    <!--
+                                    <modules>
+                                        <module>
+                                            <artifact>
+                                                <groupId>org.json</groupId>
+                                                <artifactId>json</artifactId>
+                                            </artifact>
+                                            <moduleInfo>
+                                                <name>org.json</name>
+                                            </moduleInfo>
+                                        </module>
+                                    </modules>
+                                    -->
+
+                                    <module>
+                                        <mainClass>${main.class}</mainClass>
+                                        <moduleInfoFile>${project.build.sourceDirectory}/module-info.java</moduleInfoFile>
+                                    </module>
+
+                                    <jdepsExtraArgs>
+                                        --ignore-missing-deps
+                                    </jdepsExtraArgs>
+                                </configuration>
+                                <goals>
+                                    <goal>add-module-info</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>create-runtime-image</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>create-runtime-image</goal>
+                                </goals>
+                                <configuration>
+                                    <modulePath>
+                                        <path>${project.build.directory}/modules</path>
+                                    </modulePath>
+                                    <modules>
+                                        <module>${main.module}</module>
+                                    </modules>
+                                    <launcher>
+                                        <name>${launcher}</name>
+                                        <module>${main.module}</module>
+                                    </launcher>
+                                    <compression>2</compression>
+                                    <bindServices>true</bindServices>
+                                    <jarInclusionPolicy>APP_WITH_DEPENDENCIES</jarInclusionPolicy>
+                                    <stripDebug>true</stripDebug>
+                                    <outputDirectory>${project.build.directory}/jlink-image</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Build JPackage App-Image -->
+                    <plugin>
+                        <groupId>com.github.akman</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>${jpackage.maven.plugin}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                                <configuration>
+                                    <name>${appName}</name>
+                                    <type>IMAGE</type>
+                                    <runtimeimage>${project.build.directory}/jlink-image</runtimeimage>
+                                    <module>${main.module}/${main.class}</module>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
 </project>

@@ -24,9 +24,10 @@
 
         <!-- Dependency versions -->
         <junit.version>5.9.1</junit.version>
+        <lombok.version>1.18.26</lombok.version>
         <javafx.version>19.0.2</javafx.version>
-        <lombok.version>1.18.24</lombok.version>
         <jetbrains.annotations.version>23.1.0</jetbrains.annotations.version>
+        <lombok.version>1.18.24</lombok.version>
 
         <!-- Plugin dependencies -->
 		<maven.clean.plugin>3.2.0</maven.clean.plugin>

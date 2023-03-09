@@ -362,6 +362,8 @@
                     </modulepath>
                     <addmodules>
                         <addmodule>javafx.controls</addmodule>
+                        <addmodule>javafx.graphics</addmodule>
+                        <addmodule>javafx.fxml</addmodule>
                     </addmodules>
                     <mainclass>${main.class}</mainclass>
                     <input>${project.build.directory}/modules</input>

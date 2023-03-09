@@ -19,24 +19,23 @@ public class JavaFXApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-
-		primaryStage.setTitle("Hello World!");
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
-		Parent root = fxmlLoader.load();
-		primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-		/*
-		Button btn = new Button();
-		btn.setText("Say 'Hello World'");
-		btn.setOnAction(e -> System.out.println("Hello World!"));
-
-		StackPane root = new StackPane();
-		root.getChildren().add(btn);
-		*/
+		try {
+			primaryStage.setTitle("Hello World!");
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+			Parent root = fxmlLoader.load();
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+		} catch (Exception ex) {
+			logger.error("Exception!", ex);
+		}
 	}
 
 	public static void main(String[] args) {
 		logger.warn("Starting ...");
-		launch(args);
+		try {
+			launch(args);
+		} catch (Exception ex) {
+			logger.error("Exception!", ex);
+		}
 	}
 }

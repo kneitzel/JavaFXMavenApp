@@ -6,8 +6,5 @@ Maven modules are configured so that even Images are build (including JPackage a
 
 Project includes PMD and spotbugs!
 
-
-Branches shows,
-- including log4j
-- including slf4j
-This is just for testing purpose / was requiried during threads in http://java-forum.org.
+**Important**: Using moditect to add module descriptions is not required. New solution to create images through jpackage will be commited soon.
+Check branch direct-jpackage to see the current test project I build.

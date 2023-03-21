@@ -318,7 +318,6 @@
                 </property>
             </activation>
             <build>
-                <finalName>${jar.filename}</finalName>
                 <plugins>
                     <!-- Copy dependencies -->
                     <plugin>

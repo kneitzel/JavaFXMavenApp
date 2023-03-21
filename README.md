@@ -2,9 +2,14 @@
 
 Example Maven Project for a JavaFX Application.
 
-Maven modules are configured so that even Images are built (including JPackage app-image).
+This projects includes multiple plugins:
+- Static code analysis with PMD and Spotbugs
+- Check of dependency updates during build
+- Build of an App-Image using JPackage
 
-Project includes PMD and spotbugs!
+The application is no longer a modular application so there are no problems with dependencies that are not providing a 
+module-info.
 
-**Important**: Using moditect to add module descriptions is not required. New solution to create images through jpackage will be commited soon.
-Check branch direct-jpackage to see the current test project I build.
+** Build the Image **
+To build the image, the profile Image must be used:
+```./mvnw -DImage install```

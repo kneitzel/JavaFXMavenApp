@@ -1,24 +1,17 @@
 package de.kneitzel;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
 public class JavaFXApp extends Application {
-	static final Logger logger = LogManager.getLogger(JavaFXApp.class);
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage primaryStage) {
 		try {
 			primaryStage.setTitle("Hello World!");
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
@@ -26,16 +19,12 @@ public class JavaFXApp extends Application {
 			primaryStage.setScene(new Scene(root));
 			primaryStage.show();
 		} catch (Exception ex) {
-			logger.error("Exception!", ex);
+			System.out.println("Exception: " + ex.getMessage());
+			ex.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
-		logger.warn("Starting ...");
-		try {
 			launch(args);
-		} catch (Exception ex) {
-			logger.error("Exception!", ex);
-		}
 	}
 }

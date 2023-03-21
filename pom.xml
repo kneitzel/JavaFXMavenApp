@@ -17,18 +17,17 @@
         <link.name>${project.artifactId}</link.name>
         <launcher>${project.artifactId}</launcher>
         <appName>${project.artifactId}</appName>
-        <main.class>de.kneitzel.JavaFXApp</main.class>
-        <main.module>FXAppModule</main.module>
+        <main.class>de.kneitzel.Main</main.class>
         <java.version>17</java.version>
         <required.maven.version>3.6.3</required.maven.version>
-        <jar.file>javafxapp</jar.file>
+        <jar.filename>${project.artifactId}-${project.version}</jar.filename>
 
         <!-- Dependency versions -->
-        <junit.version>5.9.1</junit.version>
         <javafx.version>19</javafx.version>
-        <log4j.version>2.19.0</log4j.version>
-        <lombok.version>1.18.24</lombok.version>
-        <jetbrains.annotations.version>23.0.0</jetbrains.annotations.version>
+        <jetbrains.annotations.version>24.0.1</jetbrains.annotations.version>
+        <junit.version>5.9.2</junit.version>
+        <lombok.version>1.18.26</lombok.version>
+        <mockito.version>5.2.0</mockito.version>
 
         <!-- Plugin dependencies -->
 		<maven.clean.plugin>3.2.0</maven.clean.plugin>
@@ -44,7 +43,7 @@
         <moditect.maven.plugin>1.0.0.RC2</moditect.maven.plugin>
         <jpackage.maven.plugin>0.1.3</jpackage.maven.plugin>
         <maven.pmd.version>3.16.0</maven.pmd.version>
-        <pmd.version>6.50.0</pmd.version>
+        <pmd.version>6.55.0</pmd.version>
         <codehaus.version.plugin>2.11.0</codehaus.version.plugin>
         <spotbugs.maven.plugin>4.7.2.0</spotbugs.maven.plugin>
         <spotbugs.version>4.7.3</spotbugs.version>
@@ -58,6 +57,7 @@
     </properties>
 
     <dependencies>
+        <!-- JavaFX dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -79,11 +79,40 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Dependency used for @NotNull / @Nullable -->
@@ -94,28 +123,10 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
-        <finalName>${jar.file}</finalName>
+        <finalName>${jar.filename}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -290,94 +301,109 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven.dependency.plugin}</version>
-                <executions>
-                    <!-- erstmal Abhängigkeiten für den Class-Path kopieren -->
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <excludeGroupIds>org.openjfx</excludeGroupIds>
-                            <includeScope>runtime</includeScope>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>${project.packaging}</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                        </configuration>
-                    </execution>
-
-                    <!-- dazu noch das Projekt-JAR -->
-                    <execution>
-                        <id>copy</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>${project.packaging}</type>
-                                    <destFileName>${project.build.finalName}.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.github.akman</groupId>
-                <artifactId>jpackage-maven-plugin</artifactId>
-                <version>${jpackage.maven.plugin}</version>
-                <configuration>
-                    <name>${appName}</name>
-                    <type>IMAGE</type>
-                    <modulepath>
-                        <dependencysets>
-                            <dependencyset>
-                                <includenames>
-                                    <includename>javafx\..*</includename>
-                                </includenames>
-                            </dependencyset>
-                        </dependencysets>
-                    </modulepath>
-                    <addmodules>
-                        <addmodule>javafx.controls</addmodule>
-                        <addmodule>javafx.graphics</addmodule>
-                        <addmodule>javafx.fxml</addmodule>
-                    </addmodules>
-                    <mainclass>${main.class}</mainclass>
-                    <input>${project.build.directory}/modules</input>
-                    <mainjar>${jar.file}.jar</mainjar>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>jpackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+
+        <!-- Profile that adds JLink and JPackage runs.
+
+             Add -PImage or -DImage to use this profile.
+             -->
+        <profile>
+            <id>Image</id>
+            <activation>
+                <property>
+                    <name>Image</name>
+                </property>
+            </activation>
+            <build>
+                <finalName>${jar.filename}</finalName>
+                <plugins>
+                    <!-- Copy dependencies -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven.dependency.plugin}</version>
+                        <executions>
+                            <!-- erstmal Abhängigkeiten für den Class-Path kopieren -->
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                                    <includeScope>runtime</includeScope>
+                                    <overWriteReleases>false</overWriteReleases>
+                                    <overWriteSnapshots>false</overWriteSnapshots>
+                                    <overWriteIfNewer>true</overWriteIfNewer>
+                                </configuration>
+                            </execution>
+
+                            <!-- dazu noch das Projekt-JAR -->
+                            <execution>
+                                <id>copy</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/modules</outputDirectory>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${project.groupId}</groupId>
+                                            <artifactId>${project.artifactId}</artifactId>
+                                            <version>${project.version}</version>
+                                            <type>${project.packaging}</type>
+                                            <destFileName>${project.build.finalName}.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <overWriteIfNewer>true</overWriteIfNewer>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>com.github.akman</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>${jpackage.maven.plugin}</version>
+                        <configuration>
+                            <name>${appName}</name>
+                            <type>IMAGE</type>
+                            <modulepath>
+                                <dependencysets>
+                                    <dependencyset>
+                                        <includenames>
+                                            <includename>javafx\..*</includename>
+                                        </includenames>
+                                    </dependencyset>
+                                </dependencysets>
+                            </modulepath>
+                            <addmodules>
+                                <addmodule>javafx.controls</addmodule>
+                                <addmodule>javafx.graphics</addmodule>
+                                <addmodule>javafx.fxml</addmodule>
+                                <addmodule>javafx.web</addmodule>
+                            </addmodules>
+                            <mainclass>${main.class}</mainclass>
+                            <input>${project.build.directory}/modules</input>
+                            <mainjar>${jar.filename}.jar</mainjar>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 </project>

@@ -23,7 +23,7 @@
         <jar.filename>${project.artifactId}-${project.version}</jar.filename>
 
         <!-- Dependency versions -->
-        <javafx.version>19</javafx.version>
+        <javafx.version>19.0.2.1</javafx.version>
         <jetbrains.annotations.version>24.0.1</jetbrains.annotations.version>
         <junit.version>5.9.2</junit.version>
         <lombok.version>1.18.26</lombok.version>

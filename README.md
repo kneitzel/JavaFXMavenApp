@@ -37,13 +37,15 @@ To clean up the project, call
 ```./mvnw javafx:run```
 
 **Build the Image**
+
 To build the image, the profile Image must be used:
 ```./mvnw -DImage install```
 
-**Important** You cannoz build an image using the javafx plugin. The javafx plugin would require that you build a modular
+**Important** You cannot build an image using the javafx plugin. The javafx plugin would require that you build a modular
 Java application and all dependencies providing a module description.
 
 **Static code analysis**
+
 The static code analysis is done when you build the application. The results can be found in
 - ./target/pmx.xml
 - ./target/spotbugsXml.xml

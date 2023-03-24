@@ -45,6 +45,7 @@
         <maven.pmd.version>3.16.0</maven.pmd.version>
         <pmd.version>6.55.0</pmd.version>
         <codehaus.version.plugin>2.11.0</codehaus.version.plugin>
+        <javafx.maven.plugin>0.0.8</javafx.maven.plugin>
         <spotbugs.maven.plugin>4.7.2.0</spotbugs.maven.plugin>
         <spotbugs.version>4.7.3</spotbugs.version>
 
@@ -301,6 +302,15 @@
                 </executions>
             </plugin>
 
+            <!-- JavaFX Plugin to start application -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx.maven.plugin}</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

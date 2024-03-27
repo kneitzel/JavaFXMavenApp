@@ -16,7 +16,7 @@ This projects includes multiple plugins:
 *Quick Start*
 
 - Simply download a zip file of this project and unzip it somewhere on your computer
-- open the opm.xml and change the settings at the start of the document to fit with your project
+- open the pom.xml and change the settings at the start of the document to fit with your project
 
 
 *How to use this project*

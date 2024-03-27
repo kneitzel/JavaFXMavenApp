@@ -18,7 +18,7 @@
         <launcher>${project.artifactId}</launcher>
         <appName>${project.artifactId}</appName>
         <main.class>de.kneitzel.Main</main.class>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <required.maven.version>3.8.6</required.maven.version>
         <jar.filename>${project.artifactId}-${project.version}</jar.filename>
 
@@ -43,7 +43,6 @@
         <moditect.maven.plugin>1.0.0.RC2</moditect.maven.plugin>
         <jpackage.maven.plugin>0.1.5</jpackage.maven.plugin>
         <maven.pmd.version>3.21.2</maven.pmd.version>
-        <pmd.version>6.55.0</pmd.version>
         <codehaus.version.plugin>2.16.2</codehaus.version.plugin>
         <javafx.maven.plugin>0.0.8</javafx.maven.plugin>
         <spotbugs.maven.plugin>4.8.3.1</spotbugs.maven.plugin>
@@ -237,32 +236,11 @@
                 </executions>
             </plugin>
 
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven.pmd.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-core</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-java</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-javascript</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-jsp</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
@@ -276,15 +254,12 @@
                     <execution>
                         <phase>prepare-package</phase>
                         <goals>
-                            <!-- pmd does not stop build when violations are found -->
                             <goal>pmd</goal>
-
-                            <!-- check stops the build when violations are found -->
-                            <!-- <goal>check</goal> -->
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+            -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

@@ -1,5 +1,15 @@
 # Übersicht über die Dokumentation
 
-[Übersicht über das Maven Projekt] (MavenProject.md)
+- [Schnellstart](QuickStart.md)
 
-[Erzeugung eines Images](ImageCreation.md)
+## Maven Projekt
+- [Übersicht über das Maven Projekt](MavenProject.md)
+- [Erzeugung eines Images](ImageCreation.md)
+- Überprüfung auf Aktualisierungen
+
+# Statische Codeanalyse
+- PMD
+- SpotBugs
+
+# Sonstiges
+- Lombok

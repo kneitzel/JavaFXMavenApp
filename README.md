@@ -12,7 +12,7 @@ This projects includes multiple plugins:
 - JavaFX plugin to start application
 
 **Requirements**
-To use this Template, all you need is a local Java Installation. My current advice is to use a long term supported (LTS) version e.g. 11, 17 or 21.
+To use this Template, all you need is a local Java Installation. My current advice is to use a long term supported (LTS) version of either Java 17 or Java 21.
 
 **Important** All commands following should be issued in the root directoy of the project (the directory where you find the pom.xml)
 

@@ -49,6 +49,8 @@
         <spotbugs.version>4.8.5</spotbugs.version>
 
         <!-- other properties -->
+        <pmd.target>pmd</pmd.target> <!-- Set to 'pmd' if pmd should not fail on issues. Set to 'check' if you want build to fail when issues found -->
+        <spotbugs.target>spotbugs</spotbugs.target> <!-- Set to 'spotbugs' if spotbugs should not fail on issues. Set to 'check' if you want build to fail when issues found -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -226,11 +228,7 @@
                     <execution>
                         <phase>prepare-package</phase>
                         <goals>
-                            <!-- spotbugs does not stop build when violations are found -->
-                            <goal>spotbugs</goal>
-
-                            <!-- check stops the build when violations are found -->
-                            <!-- <goal>check</goal> -->
+                            <goal>${spotbugs.target}</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -241,7 +239,6 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven.pmd.version}</version>
                 <configuration>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.version}</targetJdk>
                     <linkXRef>false</linkXRef>
@@ -253,11 +250,7 @@
                     <execution>
                         <phase>prepare-package</phase>
                         <goals>
-                            <!-- pmd target does not stop build when violations are found -->
-                            <goal>pmd</goal>
-
-                            <!-- check stops the build when violations are found -->
-                            <!-- <goal>check</goal> -->
+                            <goal>${pmd.target}</goal>
                         </goals>
                     </execution>
                 </executions>

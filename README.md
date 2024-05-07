@@ -18,4 +18,5 @@ My current advice is to use a long term supported (LTS) version of either Java 1
 **Important** All commands following should be issued in the root directoy of the project (the directory where you find the pom.xml)
 
 **[Documentation in English](documentation/en/_Index.md)**
+
 **[Dokumentation in Deutsch](documentation/de/_Index.md)**

@@ -288,13 +288,13 @@
 
         <!-- Profile that adds JLink and JPackage runs.
 
-             Add -PImage or -DImage to use this profile.
+             Add -Pimage or -Dimage to use this profile.
              -->
         <profile>
-            <id>Image</id>
+            <id>image</id>
             <activation>
                 <property>
-                    <name>Image</name>
+                    <name>image</name>
                 </property>
             </activation>
             <build>

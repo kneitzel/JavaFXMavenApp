@@ -31,7 +31,7 @@ Um die Anwendung zu übersetzen kannst Du aufrufen:
 
 Um das Image zu bauen, rufst du einfach Maven mit dem Profil Image und dem
 Ziel install auf:
-```./mvnw -DImage install```
+```./mvnw -Dimage install```
 
 **Wichtig** Du kannst nicht das JavaFX Plugin mit dem Ziel javafx:jlink verwenden,
 da dieses Plugin zwingend eine Modulbeschreibung für das Projekt und alle

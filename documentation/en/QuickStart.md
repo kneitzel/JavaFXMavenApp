@@ -28,7 +28,7 @@ to build the application.
 ### Build the Image
 
 To build the image, the profile Image must be used:
-```./mvnw -DImage install```
+```./mvnw -Dimage install```
 
 **Important** You cannot build an image using the javafx plugin. The javafx plugin requires that you build a modular
 Java application and all dependencies providing a module description.

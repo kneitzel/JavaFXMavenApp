@@ -8,6 +8,9 @@ Stelle Deiner Wahl auf dem Computer.
 angegeben. Unter Windows kannst Du am Anfang des Befehles das ./mvnw durch mvnw
 ersetzen.
 
+**Hinweis**: Die Befehle müssen im Hauptverzeichnis des Projekts, in dem auch
+die pom.xml ist, ausgeführt werden.
+
 ## Wie kannst Du das Projekt nutzen
 
 ### Start der Anwendung von der Kommandozeile

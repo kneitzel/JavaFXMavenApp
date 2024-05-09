@@ -3,6 +3,11 @@
 - Simply download a zip file of this project and unzip it somewhere on your computer
 - open the pom.xml and change the settings at the start of the document to fit with your project
 
+**Important** The shown commands use a syntax that is used by unix and macos. If you
+are using Windows then please replace the ./mvnw with mvnw only.
+
+**Important** All commands shown should be issued in the root directoy of the project (the directory where you find the pom.xml)
+
 ## How to use this project
 
 ### Start the application from commandline

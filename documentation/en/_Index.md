@@ -12,4 +12,5 @@
 - [SpotBugs](SpotBugs.md)
 
 ## Other Topics
+- Reporting
 - Lombok

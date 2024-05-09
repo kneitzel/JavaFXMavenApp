@@ -2,6 +2,8 @@
 
 Example Maven Project for a JavaFX Application.
 
+**Update**: Added reporting to create a site (html documentation of project)
+
 **Update**: Java 21 is now fully supported
 
 This projects includes multiple plugins:

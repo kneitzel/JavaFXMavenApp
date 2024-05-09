@@ -8,8 +8,8 @@
 - Checking of Updates
 
 ## [Static Code Analysis](StaticCodeAnalysis.md)
-- PMD
-- FindBugs
+- [PMD](PMD.md)
+- [SpotBugs](SpotBugs.md)
 
 ## Other Topics
 - Lombok

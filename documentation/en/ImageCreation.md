@@ -9,12 +9,12 @@ Creation of an "image": A directory structure with files along with a binary tha
 
 ## Invocation
 
-To build the image, start Maven with the Image profile and the install goal.
+To build the image, start Maven with the image profile and the install goal.
 Since there are sometimes problems when files need to be overwritten, a clean should be run first.
 
 This can be done in one run:
 ```shell
-mvnw -PImage clean install
+mvnw -Pimage clean install
 ```
 
 ## Description of theImage Profile
@@ -23,10 +23,10 @@ mvnw -PImage clean install
 
 ```xml
         <profile>
-            <id>Image</id>
+            <id>image</id>
             <activation>
                 <property>
-                    <name>Image</name>
+                    <name>image</name>
                 </property>
             </activation>
             <build>
@@ -39,8 +39,8 @@ mvnw -PImage clean install
         </profile>
 ```
 
-- The profile has an ID: Image. This allows the profile to be selected using -PImage.
-- Additionally, the profile can be selected using a define: -DImage
+- The profile has an ID: image. This allows the profile to be selected using -Pimage.
+- Additionally, the profile can be selected using a define: -Dimage
 - The profile itself then contains plugins.
 
 ### maven-dependency-plugin

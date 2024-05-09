@@ -11,25 +11,25 @@ werden kann.
 
 ## Aufruf
 
-Um das Image zu bauen, ist Maven mit dem Profil Image und dem Ziel install zu starten.
+Um das Image zu bauen, ist Maven mit dem Profil image und dem Ziel install zu starten.
 Da es teilweise zu Problemen kommt, wenn Dateien überschrieben werden müssen, sollte
 als Erstes ein clean durchlaufen.
 
 Dies kann in einem Durchlauf erfolgen:
 ```shell
-mvnw -PImage clean install
+mvnw -Pimage clean install
 ```
 
-## Beschreibung des Image Profils
+## Beschreibung des image Profils
 
 ### Das Profil
 
 ```xml
         <profile>
-            <id>Image</id>
+            <id>image</id>
             <activation>
                 <property>
-                    <name>Image</name>
+                    <name>image</name>
                 </property>
             </activation>
             <build>
@@ -42,8 +42,8 @@ mvnw -PImage clean install
         </profile>
 ```
 
-- Das Profil hat eine Id: Image. Damit ist es möglich, das Profil über -PImage auszuwählen.
-- Durch die activation Property ist es zusätzlich möglich, das Profil auch über ein Define auszuwählen: -DImage
+- Das Profil hat eine Id: image. Damit ist es möglich, das Profil über -Pimage auszuwählen.
+- Durch die activation Property ist es zusätzlich möglich, das Profil auch über ein Define auszuwählen: -Dimage
 - In dem Profil selbst sind dann Plugins untergebracht.
 
 ### maven-dependency-plugin

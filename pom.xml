@@ -30,6 +30,9 @@
         <mockito.version>5.11.0</mockito.version>
 
         <!-- Plugin dependencies -->
+        <codehaus.version.plugin>2.16.2</codehaus.version.plugin>
+        <javafx.maven.plugin>0.0.8</javafx.maven.plugin>
+        <jpackage.maven.plugin>0.1.5</jpackage.maven.plugin>
 		<maven.clean.plugin>3.3.2</maven.clean.plugin>
         <maven.compiler.plugin>3.13.0</maven.compiler.plugin>
         <maven.dependency.plugin>3.6.1</maven.dependency.plugin>
@@ -37,18 +40,19 @@
 		<maven.enforcer.plugin>3.4.1</maven.enforcer.plugin>
 		<maven.install.plugin>3.1.2</maven.install.plugin>
 		<maven.jar.plugin>3.4.1</maven.jar.plugin>
+        <maven.javadoc.plugin>3.6.3</maven.javadoc.plugin>
+        <maven.project.info.reports.plugin>3.5.0</maven.project.info.reports.plugin>
 		<maven.resources.plugin>3.3.1</maven.resources.plugin>
-		<maven.site.plugin>4.0.0-M13</maven.site.plugin>
+		<maven.site.plugin>4.0.0-M14</maven.site.plugin>
         <maven.surfire.plugin>3.2.5</maven.surfire.plugin>
         <moditect.maven.plugin>1.0.0.RC2</moditect.maven.plugin>
-        <jpackage.maven.plugin>0.1.5</jpackage.maven.plugin>
-        <maven.pmd.version>3.22.0</maven.pmd.version>
-        <codehaus.version.plugin>2.16.2</codehaus.version.plugin>
-        <javafx.maven.plugin>0.0.8</javafx.maven.plugin>
+        <maven.pmd.plugin>3.22.0</maven.pmd.plugin>
         <spotbugs.maven.plugin>4.8.5.0</spotbugs.maven.plugin>
         <spotbugs.version>4.8.5</spotbugs.version>
 
         <!-- other properties -->
+        <pmd.target>pmd</pmd.target> <!-- Set to 'pmd' if pmd should not fail on issues. Set to 'check' if you want build to fail when issues found -->
+        <spotbugs.target>spotbugs</spotbugs.target> <!-- Set to 'spotbugs' if spotbugs should not fail on issues. Set to 'check' if you want build to fail when issues found -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -226,11 +230,7 @@
                     <execution>
                         <phase>prepare-package</phase>
                         <goals>
-                            <!-- spotbugs does not stop build when violations are found -->
-                            <goal>spotbugs</goal>
-
-                            <!-- check stops the build when violations are found -->
-                            <!-- <goal>check</goal> -->
+                            <goal>${spotbugs.target}</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -239,7 +239,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>${maven.pmd.version}</version>
+                <version>${maven.pmd.plugin}</version>
                 <configuration>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.version}</targetJdk>
@@ -252,11 +252,7 @@
                     <execution>
                         <phase>prepare-package</phase>
                         <goals>
-                            <!-- pmd target does not stop build when violations are found -->
-                            <goal>pmd</goal>
-
-                            <!-- check stops the build when violations are found -->
-                            <!-- <goal>check</goal> -->
+                            <goal>${pmd.target}</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -278,6 +274,20 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- JavaFX Plugin to start application -->
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -290,17 +300,82 @@
         </plugins>
     </build>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven.project.info.reports.plugin}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>dependencies</report>
+                            <report>licenses</report>
+                            <report>summary</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>tests</id>
+                        <configuration>
+                            <show>private</show>
+                        </configuration>
+                        <reports>
+                            <report>test-javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${maven.pmd.plugin}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>pmd</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs.maven.plugin}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>spotbugs</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+
     <profiles>
 
         <!-- Profile that adds JLink and JPackage runs.
 
-             Add -PImage or -DImage to use this profile.
+             Add -Pimage or -Dimage to use this profile.
              -->
         <profile>
-            <id>Image</id>
+            <id>image</id>
             <activation>
                 <property>
-                    <name>Image</name>
+                    <name>image</name>
                 </property>
             </activation>
             <build>

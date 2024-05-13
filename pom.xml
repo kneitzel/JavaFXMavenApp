@@ -241,7 +241,6 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${maven.pmd.version}</version>
                 <configuration>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.version}</targetJdk>
                     <linkXRef>false</linkXRef>
@@ -359,21 +358,6 @@
                         <configuration>
                             <name>${appName}</name>
                             <type>IMAGE</type>
-                            <modulepath>
-                                <dependencysets>
-                                    <dependencyset>
-                                        <includenames>
-                                            <includename>javafx\..*</includename>
-                                        </includenames>
-                                    </dependencyset>
-                                </dependencysets>
-                            </modulepath>
-                            <addmodules>
-                                <addmodule>javafx.controls</addmodule>
-                                <addmodule>javafx.graphics</addmodule>
-                                <addmodule>javafx.fxml</addmodule>
-                                <addmodule>javafx.web</addmodule>
-                            </addmodules>
                             <mainclass>${main.class}</mainclass>
                             <input>${project.build.directory}/modules</input>
                             <mainjar>${jar.filename}.jar</mainjar>

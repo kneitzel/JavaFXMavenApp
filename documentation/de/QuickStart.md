@@ -37,6 +37,11 @@ Ziel install auf:
 da dieses Plugin zwingend eine Modulbeschreibung für das Projekt und alle
 Abhängigkeiten erfordert.
 
+## Bau einer fat jar Datei
+
+Über das Profil fatjar läßt sich auch ein fat jar File bauen, welches alle Abhängigkeiten enthält.
+```./mvnw -Dimage install```
+
 ### Komplette Übersetzung des Projekts incl. Dokumentation
 Mit dem folgenden Befehl lässt sich das ganze Projekt von grundauf neu übersetzen incl.
 der Erstellung der HTML Dokumentation des Projektes:

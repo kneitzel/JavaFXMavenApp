@@ -33,6 +33,11 @@ To build the image, the profile Image must be used:
 **Important** You cannot build an image using the javafx plugin. The javafx plugin requires that you build a modular
 Java application and all dependencies providing a module description.
 
+### Build a fat jar file
+
+You can build a fat jar file using the fatjar Image:
+```./mvnw -Dfatjar package```
+
 ### complete build including documentation
 To build the complete project from scratch and build all parts possible, you could use the following command:
 ```./mvnw -Dimage clean install site```

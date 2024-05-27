@@ -14,3 +14,6 @@
 ## Other Topics
 - Reporting
 - Lombok
+
+## [Questions and Answers](qa.md)
+- Warning: Unsupported JavaFX configuration: classes were loaded from 'unnamed module

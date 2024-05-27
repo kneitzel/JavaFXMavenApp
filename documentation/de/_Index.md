@@ -5,7 +5,7 @@
 ## Maven Projekt
 - [Übersicht über das Maven Projekt](MavenProject.md)
 - [Erzeugung eines Images](ImageCreation.md)
-- Überprüfung auf Aktualisierungen
+- [Überprüfung auf Updates](CheckUpdates.md)
 
 ## [Statische Codeanalyse](StaticCodeAnalysis.md)
 - [PMD](PMD.md)

@@ -2,12 +2,15 @@
 
 Example Maven Project for a JavaFX Application.
 
+**Update**: Added profile fatjar
+
 **Update**: Added reporting to create a site (html documentation of project)
 
 **Update**: Java 21 is now fully supported
 
 This projects includes multiple plugins:
-- Build of an App-Image using JPackage
+- Build of an App-Image using JPackage (Profile: image)
+- Build of an fat jar (Profile: fatjar)
 - Use of Maven Wrapper
 - Static code analysis with PMD and Spotbugs
 - Check of dependency updates during build

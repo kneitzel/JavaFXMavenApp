@@ -24,7 +24,7 @@
 
         <!-- Dependency versions -->
         <javafx.version>21.0.6</javafx.version>
-        <jetbrains.annotations.version>26.0.2</jetbrains.annotations.version>
+        <jetbrains.annotations.version>26.0.2-1</jetbrains.annotations.version>
         <junit.version>5.11.4</junit.version>
         <lombok.version>1.18.36</lombok.version>
         <mockito.version>5.15.2</mockito.version>

@@ -2,6 +2,8 @@
 
 Example Maven Project for a JavaFX Application.
 
+**Update 03.02.2025**: Updated dependencies and tested Java 22 and 23 successful.
+
 **Update**: Added profile fatjar
 
 **Update**: Added reporting to create a site (html documentation of project)

@@ -433,21 +433,6 @@
                         <configuration>
                             <name>${appName}</name>
                             <type>IMAGE</type>
-                            <modulepath>
-                                <dependencysets>
-                                    <dependencyset>
-                                        <includenames>
-                                            <includename>javafx\..*</includename>
-                                        </includenames>
-                                    </dependencyset>
-                                </dependencysets>
-                            </modulepath>
-                            <addmodules>
-                                <addmodule>javafx.controls</addmodule>
-                                <addmodule>javafx.graphics</addmodule>
-                                <addmodule>javafx.fxml</addmodule>
-                                <addmodule>javafx.web</addmodule>
-                            </addmodules>
                             <mainclass>${main.class}</mainclass>
                             <input>${project.build.directory}/modules</input>
                             <mainjar>${jar.filename}.jar</mainjar>

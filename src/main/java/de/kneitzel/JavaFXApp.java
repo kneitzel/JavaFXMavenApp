@@ -6,11 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
+/**
+ * The main application class for a JavaFX-based desktop application.
+ * This class extends {@link Application} and overrides the {@code start} method to set up and display the main window.
+ */
 public class JavaFXApp extends Application {
 
-	@Override
+	/**
+     * Starts the JavaFX application by setting up and displaying the main window.
+     *
+     * @param primaryStage The primary stage for this application, onto which the scene can be set.
+     */
+    @Override
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.setTitle("Hello World!");
@@ -24,7 +31,12 @@ public class JavaFXApp extends Application {
 		}
 	}
 
-	public static void main(String[] args) {
+	/**
+     * The main method that launches the JavaFX application. This is a wrapper to ensure compatibility with JavaFX's class loading requirements, particularly useful when starting from
+     *  within NetBeans.
+     * @param args Command-line arguments.
+     */
+    public static void main(String[] args) {
 			launch(args);
 	}
 }

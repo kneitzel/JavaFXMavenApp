@@ -4,3 +4,4 @@ target
 debug.out
 /nbactions.xml
 .DS_Store
+dependency-reduced-pom.xml

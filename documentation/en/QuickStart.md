@@ -1,12 +1,14 @@
 # Quick Start
 
+Install JDK 25, set `JAVA_HOME` to that JDK, and check it with `./mvnw -v`. The wrapper supplies Maven; a separate Maven installation must be at least 3.9.11. Maven downloads JavaFX 27.0.1 and its platform libraries.
+
 - Simply download a zip file of this project and unzip it somewhere on your computer
 - open the pom.xml and change the settings at the start of the document to fit with your project
 
 **Important** The shown commands use a syntax that is used by unix and macos. If you
 are using Windows then please replace the ./mvnw with mvnw only.
 
-**Important** All commands shown should be issued in the root directoy of the project (the directory where you find the pom.xml)
+**Important** All commands shown should be issued in the root directory of the project (the directory where you find the pom.xml)
 
 ## How to use this project
 

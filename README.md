@@ -2,12 +2,6 @@
 
 Example Maven Project for a JavaFX Application.
 
-**Update 05.09.2026**: Updated dependencies and verified the build with JDK 25 (OpenJDK 25.0.4.1) and JavaFX 25.0.4.
-
-**Update 14.10.2024**: Updated dependencies and tested Java 25 successful.
-
-**Update 03.02.2025**: Updated dependencies and tested Java 22 and 23 successful.
-
 This projects includes multiple plugins:
 - Build of an App-Image using JPackage (Profile: image)
 - Build of an fat jar (Profile: fatjar)
@@ -16,9 +10,13 @@ This projects includes multiple plugins:
 - Check of dependency updates during build
 - JavaFX plugin to start application
 
-**Requirements**
-To use this Template, all you need is a local Java Installation.
-The project targets Java 25 (`<java.version>25</java.version>`). JavaFX 25 requires JDK 23 or later. My current advice for general production use is still a long term supported (LTS) version of either Java 17 or Java 21.
+Verified on macOS (Apple Silicon) with OpenJDK 25.0.5 and the Maven wrapper.
+
+## Requirements
+
+Install JDK 25 and point `JAVA_HOME` at it. Run `./mvnw -v` to confirm Maven is using JDK 25. The wrapper supplies Maven; if you use your own installation, use Maven 3.9.11 or later.
+
+Maven downloads JavaFX 27.0.1 and its platform libraries. [JavaFX 27 requires JDK 25 or later](https://openjfx.io/highlights/27/). Start the application with `./mvnw javafx:run`.
 
 **[Documentation in English](documentation/en/_Index.md)**
 

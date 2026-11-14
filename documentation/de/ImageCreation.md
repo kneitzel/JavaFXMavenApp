@@ -1,5 +1,7 @@
 # Erstellung von Images
 
+Baue das App-Image mit JDK 25. Das Image enthält eine eigene Java-Laufzeit und ist an die Plattform gebunden, auf der es gebaut wurde.
+
 Wenn die Anwendung weiter gegeben werden soll, dann benötigt man das fertig übersetzte Programm sowie
 ggf. noch eine Anleitung zur Installation.
 
@@ -158,24 +160,18 @@ und Auslieferung orientiert.
                         <groupId>com.github.akman</groupId>
                         <artifactId>jpackage-maven-plugin</artifactId>
                         <version>${jpackage.maven.plugin}</version>
+                        <dependencies>
+                            <!-- Read JavaFX's Java 25 module descriptors. -->
+                            <dependency>
+                                <groupId>org.ow2.asm</groupId>
+                                <artifactId>asm</artifactId>
+                                <version>${jpackage.asm.version}</version>
+                            </dependency>
+                        </dependencies>
                         <configuration>
                             <name>${appName}</name>
                             <type>IMAGE</type>
-                            <modulepath>
-                                <dependencysets>
-                                    <dependencyset>
-                                        <includenames>
-                                            <includename>javafx\..*</includename>
-                                        </includenames>
-                                    </dependencyset>
-                                </dependencysets>
-                            </modulepath>
-                            <addmodules>
-                                <addmodule>javafx.controls</addmodule>
-                                <addmodule>javafx.graphics</addmodule>
-                                <addmodule>javafx.fxml</addmodule>
-                                <addmodule>javafx.web</addmodule>
-                            </addmodules>
+                            <javaoptions>--enable-native-access=ALL-UNNAMED</javaoptions>
                             <mainclass>${main.class}</mainclass>
                             <input>${project.build.directory}/modules</input>
                             <mainjar>${jar.filename}.jar</mainjar>
@@ -199,12 +195,10 @@ Wichtige Konfigurationen für dieses Plugin umfassen:
 
 - **name** und **type**: Gibt den Namen der Anwendung an und setzt den Pakettyp auf 'IMAGE', was darauf hinweist, dass 
 ein eigenständiges Installationsimage erstellt wird.
-- **modulepath**: Definiert den Pfad zu Java-Modulen und deren Abhängigkeiten, was für Anwendungen, die Java-Module 
-verwenden, unerlässlich ist.
-- **addmodules**: Listet zusätzliche JavaFX-Module auf, die eingefügt werden sollen, um sicherzustellen, dass 
-alle GUI-Komponenten korrekt funktionieren.
 - **mainclass**: Legt den Einstiegspunkt der Anwendung fest, der der vollständig qualifizierte Name der Hauptklasse ist.
 - **input**: Weist auf das Verzeichnis hin, das die kompilierten Module und Abhängigkeiten enthält.
 - **mainjar**: Gibt die Hauptausführbare JAR-Datei der Anwendung an.
 
 Diese Einrichtung ist besonders nützlich, um einen reibungslosen, gestrafften Bereitstellungsprozess für JavaFX-Anwendungen zu schaffen, wodurch die Portabilität und die einfache Installation in verschiedenen Umgebungen verbessert wird.
+
+Das Image lädt die plattformspezifischen JavaFX-JARs über den Classpath der Anwendung. Der Launcher erlaubt JavaFX den Zugriff auf native Bibliotheken.

@@ -1,8 +1,10 @@
 # Schnellstart
 
+Installiere JDK 25, setze `JAVA_HOME` auf dieses JDK und prüfe es mit `./mvnw -v`. Der Wrapper stellt Maven bereit; eine separate Maven-Installation muss mindestens Version 3.9.11 haben. Maven lädt JavaFX 27.0.1 und die Bibliotheken für Deine Plattform.
+
 - Lade einfach das Projekt als ZIP Datei von GitHub und entpacke es an einer 
 Stelle Deiner Wahl auf dem Computer.
-- Öffne die pom.xl und ändere die Einstellungen am Anfang des Dokumentes.
+- Öffne die pom.xml und ändere die Einstellungen am Anfang des Dokumentes.
 
 **Hinweis**: Im folgenden werden die Befehle für Unix artige Systeme / macos
 angegeben. Unter Windows kannst Du am Anfang des Befehles das ./mvnw durch mvnw

@@ -30,7 +30,7 @@
         <mockito.version>5.24.0</mockito.version>
 
         <!-- Plugin dependencies -->
-        <codehaus.version.plugin>2.25.1</codehaus.version.plugin>
+        <codehaus.version.plugin>2.25.2</codehaus.version.plugin>
         <javafx.maven.plugin>0.0.8</javafx.maven.plugin>
         <jpackage.asm.version>9.11.1</jpackage.asm.version>
         <jpackage.maven.plugin>0.1.5</jpackage.maven.plugin>
